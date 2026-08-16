@@ -13,7 +13,7 @@ Wriven server code — it just makes HTTP requests and renders JSON.
 ```
 ┌───────────────────────┐        ┌──────────────────────┐        ┌─────────────────────┐
 │  Wriven Dashboard     │        │  Wriven Gateway      │        │  Your Display App   │
-│  (authors edit here)  │ ──▶    │  (Delivery API)      │ ◀──    │  (React + Vite)     │
+│  (authors edit here)  │ ──▶    │  (Delivery API)      │ ◀──    │  (Next.js site)     │
 │  app.wriven.com       │ writes │  GET /v1/projects/…  │ reads  │  public site        │
 └───────────────────────┘        └──────────────────────┘        └─────────────────────┘
                                           │

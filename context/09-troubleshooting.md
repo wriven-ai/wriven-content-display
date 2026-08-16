@@ -21,11 +21,11 @@ If `curl` also fails → see the table below.
 
 ### `401 UNAUTHORIZED`
 - **Cause:** missing, malformed, wrong, expired, or revoked token.
-- **Fix:** check `VITE_WRIVEN_TOKEN` is set and starts with `wrk_live_`. Restart the
-  dev server (Vite only reads env at start). If the key was revoked, create a new one.
+- **Fix:** check `WRIVEN_TOKEN` is set and starts with `wrk_live_`. Restart the
+  dev server (Next reads `.env.local` at start). If the key was revoked, create a new one.
 
 ### `403 FORBIDDEN` — "This API key cannot access the requested project."
-- **Cause:** the `projectId` in the URL (from `VITE_WRIVEN_PROJECT_ID`) doesn't
+- **Cause:** the `projectId` in the URL (from `WRIVEN_PROJECT_ID`) doesn't
   match the key's project. Keys are scoped to one project.
 - **Fix:** confirm the Project ID on the API Keys page matches your env var.
 
@@ -60,7 +60,7 @@ If `curl` also fails → see the table below.
 ### Network error (`WrivenError` with `status: 0`, code `NETWORK_ERROR`)
 - **Cause:** the gateway isn't reachable (wrong base URL, CORS blocked, dev server
   down).
-- **Fix:** confirm `VITE_WRIVEN_BASE_URL` is just the origin (no trailing path),
+- **Fix:** confirm `WRIVEN_BASE_URL` is just the origin (no trailing path),
   the gateway is running, and (browser) the network tab shows the request reaching it.
 
 ---
@@ -115,16 +115,17 @@ always auto-resolved to `{ url, alt, … }`. If you see a string:
 The gateway enables reflected-origin CORS and handles preflight. If you still see
 CORS errors:
 - You're hitting a **different origin** than your gateway (typo in base URL).
-- You put a path in `VITE_WRIVEN_BASE_URL` (it must be origin only — the client
+- You put a path in `WRIVEN_BASE_URL` (it must be origin only — the client
   appends `/v1/…`).
-- During dev you can sidestep entirely with the Vite proxy
-  ([05-client-setup.md](./05-client-setup.md)) — set `VITE_WRIVEN_BASE_URL=/wriven-api`.
+- In this Next.js app the Delivery API is fetched **server-side**, so browser
+  CORS never applies. A client-side SPA can proxy in dev (Vite `server.proxy`
+  or a Next `rewrites` entry in `next.config.ts`).
 
 ---
 
 ## Env vars are `undefined` in the app
 
-- Vite only exposes vars prefixed with `VITE_`. Confirm the names.
+- Next.js exposes browser vars only with the `NEXT_PUBLIC_` prefix; the `WRIVEN_*` vars are intentionally server-only. Confirm the names.
 - You **must restart `pnpm dev`** after editing `.env.local`.
 - `.env.local` must be at the project root.
 - In the built bundle the values are inlined — for production builds, set them in

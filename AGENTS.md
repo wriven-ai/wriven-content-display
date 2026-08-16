@@ -2,45 +2,69 @@
 
 ## Project overview
 
-This repository is a Vite + React + TypeScript app for displaying published content from Wriven, a headless CMS. The main goal is to read content from Wriven’s Delivery API and render it in the UI with no auth flow or write access.
+This repository is the **official Wriven showcase site**: a Next.js 16 App Router
+app (TypeScript, Tailwind v4) that renders published content from Wriven, a
+headless CMS, through the official `@wriven-ai/*` npm packages. It is read-only
+— no auth flow, no write access. Its purpose is to demonstrate the full capacity
+of the Wriven Delivery API and SDK: typed content modules, reference expansion,
+rich text, SSG from live slugs, and webhook-driven ISR revalidation.
 
-Start with [context/README.md](context/README.md) for the product context and implementation guide.
+Start with [context/README.md](context/README.md) for the product context and
+integration guide.
 
 ## Architecture and key files
 
-- [src/main.tsx](src/main.tsx): app entry point.
-- [src/App.tsx](src/App.tsx): current top-level UI entry. This is the place to wire in the real content-driven experience.
-- [src/components](src/components): reusable UI building blocks.
-- [src/lib](src/lib): client-side helpers and integration code.
-- [src/assets](src/assets): static assets.
-- [vite.config.ts](vite.config.ts): Vite config with the alias for the src folder.
+- `src/app/layout.tsx`: root shell (Navbar + Footer), metadata.
+- `src/app/page.tsx`: static landing sections (`src/components/home/`).
+- `src/app/{blog,products,team,case-studies,jobs,testimonials}/`: content pages.
+  `blog/[slug]` and `case-studies/[slug]` are SSG via `generateStaticParams`.
+- `src/app/api/wriven/route.ts`: webhook route (`@wriven-ai/next`) — verifies
+  the HMAC signature and calls `revalidateTag` so publishes update the site
+  without a rebuild.
+- `src/lib/wriven.ts`: **server-only** SDK client (`createClient`) + `cacheTags`
+  helpers. The delivery token never reaches the browser bundle.
+- `src/lib/content/`: one module per content type (`blog.ts`, `products.ts`,
+  `team.ts`, `case-studies.ts`, `jobs.ts`, `testimonials.ts`,
+  `organizations.ts`, `brands.ts`) — each owns its `*Data` interfaces,
+  fetchers, and cache tags. `shared.ts` holds cross-cutting helpers.
+- `src/components/`: `content/` (Media, Prose, PageHeader), `home/`, `layout/`,
+  `primitives/` (Reveal), `ui/`.
+- `src/app/sitemap.ts`: sitemap generated from live Delivery API slugs.
 
 ## Working conventions
 
-- Prefer TypeScript and React patterns that fit the existing Vite setup.
-- Keep UI components focused and reusable; place content-specific logic in small helpers under [src/lib](src/lib) or dedicated feature components.
-- Use the configured alias `@/*` for imports; it is already wired in [vite.config.ts](vite.config.ts) and [tsconfig.json](tsconfig.json).
-- Treat environment variables as public-safe only when they are read-only Wriven delivery values; never add secrets or write-capable credentials to the frontend bundle.
-- When adding Wriven integration, follow the guidance in [context/05-client-setup.md](context/05-client-setup.md) and [context/06-rendering.md](context/06-rendering.md).
+- TypeScript + React patterns that fit the App Router: server components fetch,
+  `'use client'` only where interactivity requires it.
+- Keep UI components focused and reusable; content fetching lives in
+  `src/lib/content/*`, never inside page components.
+- Use the `@/*` alias for imports (wired in `tsconfig.json`).
+- Environment variables are **server-only** (`WRIVEN_BASE_URL`,
+  `WRIVEN_PROJECT_ID`, `WRIVEN_TOKEN`, `WRIVEN_WEBHOOK_SECRET`,
+  `NEXT_PUBLIC_SITE_URL`) — no secrets or write-capable credentials ever.
+- When touching content pages, follow [context/06-rendering.md](context/06-rendering.md)
+  and mirror the per-type module structure in `src/lib/content/`.
 
 ## Development commands
 
-Run these from the repository root:
+Run from the repository root:
 
-- `npm install`
-- `npm run dev`
-- `npm run build`
-- `npm run lint`
+- `pnpm dev`
+- `pnpm build`
+- `pnpm start`
+- `pnpm lint`
 
 ## Expectations for changes
 
 - Keep the app focused on read-only display of published content.
 - Prefer small, composable changes over large rewrites.
-- If a change introduces API calls, make sure it handles loading, error, and empty states clearly.
-- When updating UI, preserve the existing Vite/React structure and avoid introducing unnecessary dependencies.
+- Any new content type gets its own module in `src/lib/content/` and its own
+  cache tag; register the tag in the webhook route's revalidate map.
+- Handle loading, error, and empty states clearly on new pages.
+- Preserve the existing Next.js structure; avoid unnecessary dependencies.
 
 ## Notes for AI agents
 
-- The current starter UI in [src/App.tsx](src/App.tsx) is not yet a finished Wriven display implementation; treat it as a placeholder to replace or evolve.
-- The most relevant implementation reference is the Wriven guide in [context](context).
-- If you need to add new views or content types, mirror the patterns described in [context/07-content-type-examples.md](context/07-content-type-examples.md).
+- The site is complete and rendering live content; treat `context/` as the
+  integration reference for *why* things are wired the way they are.
+- Deploy + webhook registration steps live in
+  [context/08-next-build-guide.md](context/08-next-build-guide.md).

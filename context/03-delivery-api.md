@@ -141,7 +141,7 @@ typed error otherwise.
 
 | Code | Status | Meaning / fix |
 |------|--------|---------------|
-| `UNAUTHORIZED` | 401 | Missing/invalid/expired/revoked token. Check `VITE_WRIVEN_TOKEN`. |
+| `UNAUTHORIZED` | 401 | Missing/invalid/expired/revoked token. Check `WRIVEN_TOKEN` (server env) or your client-side token var. |
 | `FORBIDDEN` | 403 | The path's `projectId` ≠ the key's project, or the key scope can't do this. |
 | `NOT_FOUND` | 404 | Wrong `apiId` or `slug`, or no published entry matches. |
 | `VALIDATION_ERROR` | 422 | Malformed query params. |
@@ -163,7 +163,7 @@ Cache-Tag:     proj_{projectId} type_{apiId} entry_{id} …
 - `s-maxage=60` — a CDN may serve a cached copy for 60s, then refresh in the
   background for up to 300s.
 - Wriven purges these tags on publish/unpublish/delete, so content stays fresh.
-- For a **Vite SPA** (client-side fetch) this mostly matters if you put a CDN in
+- For a **client-side SPA** (Vite) this mostly matters if you put a CDN in
   front of the API; the browser will still revalidate. For list-heavy pages,
   consider a small client-side cache (e.g. SWR/TanStack Query).
 

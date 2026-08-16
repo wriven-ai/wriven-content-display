@@ -97,23 +97,29 @@ The Wriven gateway enables CORS with **reflected origins** (`Access-Control-Allo
 mirrors the requester) and supports credentialed requests. Because the Delivery API
 uses a `Bearer` token (not cookies), a browser `fetch` with an `Authorization` header
 is a "non-simple" request and triggers a CORS **preflight** (`OPTIONS`) — the gateway
-handles it automatically. **So a Vite app running on `localhost:5173` can call the
+handles it automatically. **So any browser app (e.g. a Vite SPA on `localhost:5173`) can call the
 gateway directly.** No proxy required for development (though one is optional — see
 [05-client-setup.md](./05-client-setup.md)).
 
-## 5. Put the values in Vite env vars
+## 5. Put the values in env vars
 
-Vite exposes env vars to the client only if they are prefixed with `VITE_`. Create
-`.env.local` (git-ignored by default):
+This repo (Next.js) keeps the values **server-side** in `.env.local`
+(git-ignored by default) — no `NEXT_PUBLIC_` prefix, so they never reach the
+browser bundle:
 
 ```bash
 # .env.local  (NEVER commit this)
-VITE_WRIVEN_BASE_URL=http://localhost:5000
-VITE_WRIVEN_PROJECT_ID=11111111-2222-3333-4444-555555555555
-VITE_WRIVEN_TOKEN=wrk_live_a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6
+WRIVEN_BASE_URL=https://api.wriven.tech
+WRIVEN_PROJECT_ID=11111111-2222-3333-4444-555555555555
+WRIVEN_TOKEN=wrk_live_a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6
 ```
 
-Read them in code via `import.meta.env.VITE_WRIVEN_*`.
+Read them in code via `process.env.WRIVEN_*` (server components only —
+see [05-client-setup.md](./05-client-setup.md)).
+
+If you build a client-side app instead (Vite SPA), use `VITE_WRIVEN_*` env
+vars read via `import.meta.env` — shipping a `read` key in the bundle is
+public-safe by design.
 
 > **Is it OK to ship `wrk_live_…` in the browser bundle?** **Yes.** A `read` key
 > only reads published content for one project — that is its entire purpose, and it

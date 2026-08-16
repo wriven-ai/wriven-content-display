@@ -285,5 +285,5 @@ The display app's pages map almost 1:1 to content types:
 | `/blog/:slug` | `blog_post` | `getEntry('blog_post', slug, { include: 1 })` |
 | `/team` | `team_member` | `getEntries('team_member', { sort: 'order' })` |
 
-The full Vite scaffold (router, hooks, all pages) is in
-[08-vite-build-guide.md](./08-vite-build-guide.md).
+The full app structure (App Router pages, per-type content modules, webhook
+route) is in [08-next-build-guide.md](./08-next-build-guide.md).
