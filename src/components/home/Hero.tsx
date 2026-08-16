@@ -2,6 +2,7 @@
 // The thesis. Eyebrow metadata + a Fraunces variable-font headline that sets
 // itself on load (the type-specimen signature), sub-copy, and two CTAs.
 
+import Link from 'next/link';
 import { ArrowRight, BookOpen } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -26,7 +27,7 @@ export function Hero() {
         <h1 className="specimen-headline max-w-4xl text-balance text-5xl leading-[0.98] tracking-[-0.02em] text-foreground sm:text-7xl md:text-8xl">
           Author it once.
           <br />
-          <span className="italic text-ink">Read it</span> from anywhere.
+          <span className="text-ink">Read it</span> from anywhere.
         </h1>
 
         <p className="max-w-xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
@@ -42,10 +43,10 @@ export function Hero() {
             </a>
           </Button>
           <Button asChild variant="ghost" size="lg">
-            <a href="#features">
+            <Link href="/blog">
               <BookOpen className="size-4" />
-              See features
-            </a>
+              Read the live blog
+            </Link>
           </Button>
         </div>
       </div>

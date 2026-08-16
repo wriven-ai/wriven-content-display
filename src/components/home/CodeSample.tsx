@@ -1,13 +1,17 @@
 // src/components/home/CodeSample.tsx
-// Static section: the read loop in three lines. Mono proof block, no syntax
+// The read loop with the official SDK. Mono proof block, no syntax
 // highlighting dependency — the typeface is the point. Columns reveal on scroll.
 
 import { Eyebrow } from '@/components/primitives/Eyebrow';
 import { Reveal } from '@/components/primitives/Reveal';
 
 const LINES = [
-  { t: 'import', s: ' { wriven } ' },
-  { t: 'from', s: " '@/lib/wriven'" },
+  { t: 'import', s: ' { createClient } ' },
+  { t: 'from', s: " '@wriven-ai/client';" },
+  { t: '', s: '' },
+  { t: 'const', s: ' wriven = createClient({' },
+  { t: '', s: '  projectId, token: process.env.WRIVEN_TOKEN,' },
+  { t: '', s: '});' },
   { t: '', s: '' },
   { t: 'const', s: ' { items } = ' },
   { t: 'await', s: ' wriven.getEntries(' },
@@ -30,15 +34,16 @@ export function CodeSample() {
               Fetch and render. That is the whole integration.
             </h2>
             <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-              The typed client appends the project path and unwraps the envelope. No SDK
-              required — the helper is ~50 lines of fetch.
+              The official typed client — zero dependencies, retries on 5xx, and
+              pass-through caching for Next.js ISR. That is this site&apos;s entire
+              data layer, exactly as shipped.
             </p>
           </Reveal>
 
           <Reveal delay={150} className="relative overflow-hidden border border-border/70 bg-card">
             <div className="flex items-center justify-between border-b border-border/70 px-4 py-2.5">
               <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
-                src/lib/wriven.ts
+                npm i @wriven-ai/client
               </span>
               <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-ink">
                 GET /v1/projects/…/content/…

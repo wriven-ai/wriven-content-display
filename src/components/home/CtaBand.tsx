@@ -1,6 +1,7 @@
 // src/components/home/CtaBand.tsx
 // Static closing CTA — the brand promise, anchored to the sections above.
 
+import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -20,17 +21,18 @@ export default function CtaBand() {
           </h2>
           <p className="max-w-xl text-base text-muted-foreground">
             Wriven is an AI-native headless CMS — author in the dashboard, read over a
-            typed Delivery API. This page is a static display of how it fits together.
+            typed Delivery API. Every page beyond this one is rendered from live
+            published content.
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-2">
             <Button asChild size="lg">
-              <a href="#how">
-                How it works
+              <Link href="/blog">
+                Read it here
                 <ArrowUpRight className="size-4" />
-              </a>
+              </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <a href="#features">See features</a>
+              <a href="#code">See the code</a>
             </Button>
           </div>
         </Reveal>
