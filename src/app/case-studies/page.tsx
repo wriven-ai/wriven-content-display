@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { Media } from '@/components/content/Media';
 import { PageHeader } from '@/components/content/PageHeader';
 import { Reveal } from '@/components/primitives/Reveal';
-import { getCaseStudies, isExpanded } from '@/lib/content';
+import { getCaseStudies } from '@/lib/content/case-studies';
+import { isExpanded } from '@/lib/content/shared';
 
 export const metadata: Metadata = {
   title: 'Case studies',

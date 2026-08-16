@@ -9,7 +9,8 @@ import { notFound } from 'next/navigation';
 import { Media } from '@/components/content/Media';
 import { Prose } from '@/components/content/Prose';
 import { Reveal } from '@/components/primitives/Reveal';
-import { formatDate, getPost, getPosts, isExpanded } from '@/lib/content';
+import { getPost, getPosts } from '@/lib/content/blog';
+import { formatDate, isExpanded } from '@/lib/content/shared';
 
 export async function generateStaticParams() {
   const posts = await getPosts();

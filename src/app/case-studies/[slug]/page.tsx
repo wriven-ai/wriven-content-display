@@ -7,7 +7,8 @@ import { Media } from '@/components/content/Media';
 import { PageHeader } from '@/components/content/PageHeader';
 import { Prose } from '@/components/content/Prose';
 import { Reveal } from '@/components/primitives/Reveal';
-import { getCaseStudy, getCaseStudies, isExpanded } from '@/lib/content';
+import { getCaseStudy, getCaseStudies } from '@/lib/content/case-studies';
+import { isExpanded } from '@/lib/content/shared';
 
 export async function generateStaticParams() {
   const studies = await getCaseStudies();

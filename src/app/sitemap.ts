@@ -4,7 +4,8 @@
 
 import type { MetadataRoute } from 'next';
 
-import { getCaseStudies, getPosts } from '@/lib/content';
+import { getPosts } from '@/lib/content/blog';
+import { getCaseStudies } from '@/lib/content/case-studies';
 
 const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 

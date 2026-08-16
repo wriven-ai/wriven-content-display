@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 
 import { PageHeader } from '@/components/content/PageHeader';
 import { Reveal } from '@/components/primitives/Reveal';
-import { getTestimonials } from '@/lib/content';
+import { getTestimonials } from '@/lib/content/testimonials';
 
 export const metadata: Metadata = {
   title: 'Testimonials',

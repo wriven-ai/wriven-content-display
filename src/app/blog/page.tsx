@@ -6,7 +6,8 @@ import Link from 'next/link';
 
 import { PageHeader } from '@/components/content/PageHeader';
 import { Reveal } from '@/components/primitives/Reveal';
-import { formatDate, getPosts, isExpanded } from '@/lib/content';
+import { getPosts } from '@/lib/content/blog';
+import { formatDate, isExpanded } from '@/lib/content/shared';
 
 export const metadata: Metadata = {
   title: 'Blog',

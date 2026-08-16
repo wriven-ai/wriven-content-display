@@ -7,7 +7,8 @@ import type { Metadata } from 'next';
 import { Media } from '@/components/content/Media';
 import { PageHeader } from '@/components/content/PageHeader';
 import { Reveal } from '@/components/primitives/Reveal';
-import { getTeam, isExpanded } from '@/lib/content';
+import { getTeam } from '@/lib/content/team';
+import { isExpanded, plaintext } from '@/lib/content/shared';
 
 export const metadata: Metadata = {
   title: 'Team',
@@ -68,12 +69,3 @@ export default async function TeamPage() {
   );
 }
 
-/** Bio bodies are rich text; on cards we only need the plain text. */
-function plaintext(value: unknown): string {
-  if (!value || typeof value !== 'object') return '';
-  const node = value as { content?: Array<{ content?: Array<{ text?: string }> }> };
-  return (node.content ?? [])
-    .map((n) => (n.content ?? []).map((c) => c.text ?? '').join(''))
-    .join(' ')
-    .trim();
-}

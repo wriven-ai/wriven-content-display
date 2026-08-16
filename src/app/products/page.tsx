@@ -8,7 +8,8 @@ import { Media } from '@/components/content/Media';
 import { PageHeader } from '@/components/content/PageHeader';
 import { Prose } from '@/components/content/Prose';
 import { Reveal } from '@/components/primitives/Reveal';
-import { getProducts, isExpanded } from '@/lib/content';
+import { getProducts } from '@/lib/content/products';
+import { isExpanded } from '@/lib/content/shared';
 
 export const metadata: Metadata = {
   title: 'Products',
