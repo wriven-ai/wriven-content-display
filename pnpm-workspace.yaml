@@ -1,0 +1,7 @@
+allowBuilds:
+  sharp: false
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@wriven-ai/client@0.2.1'
+  - '@wriven-ai/next@0.1.2'
+  - '@wriven-ai/react@0.1.2'

@@ -1,3 +1,5 @@
+'use client';
+
 // src/components/primitives/Reveal.tsx
 // Scroll-triggered reveal: fade + lift + de-blur when an element enters the
 // viewport, fires once. Polymorphic (`as`) so it can stand in for <li>, <section>,
