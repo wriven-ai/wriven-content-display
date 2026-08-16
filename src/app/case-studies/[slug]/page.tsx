@@ -65,7 +65,7 @@ export default async function CaseStudyPage({
               <div className="font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted-foreground">
                 client · {client.type}
               </div>
-              <div className="font-display text-lg font-semibold text-foreground">
+              <div className="font-sans text-lg font-semibold text-foreground">
                 {client.data.name}
               </div>
               {client.data.tagline ? (

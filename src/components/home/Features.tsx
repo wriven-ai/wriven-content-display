@@ -55,7 +55,7 @@ export function Features() {
               delay={120 + (i % 3) * 80}
               className="flex flex-col gap-2 border-t border-border/70 pt-4"
             >
-              <h3 className="font-display text-xl tracking-tight text-foreground">{f.title}</h3>
+              <h3 className="font-sans text-xl font-semibold tracking-tight text-foreground">{f.title}</h3>
               <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">{f.body}</p>
             </Reveal>
           ))}

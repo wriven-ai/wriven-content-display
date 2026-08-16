@@ -26,7 +26,7 @@ export default async function JobsPage() {
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+          <h2 className="font-sans text-xl font-semibold tracking-tight text-foreground">
             {job.data.title}
           </h2>
           <div className="mt-2 flex flex-wrap items-center gap-3 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">

@@ -58,7 +58,7 @@ export default async function ProductsPage() {
                         </span>
                       ) : null}
                     </div>
-                    <h2 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                    <h2 className="font-sans text-xl font-semibold tracking-tight text-foreground">
                       {p.data.name}
                     </h2>
                     <p className="text-sm text-muted-foreground">

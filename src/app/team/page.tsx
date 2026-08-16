@@ -44,7 +44,7 @@ export default async function TeamPage() {
                       className="size-14 shrink-0 rounded-full border border-border"
                     />
                     <div>
-                      <h2 className="font-display text-lg font-semibold tracking-tight text-foreground">
+                      <h2 className="font-sans text-lg font-semibold tracking-tight text-foreground">
                         {m.data.name}
                       </h2>
                       <p className="text-sm text-muted-foreground">

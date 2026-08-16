@@ -40,7 +40,7 @@ export async function LatestWriting() {
                     <span>{post.data.category}</span>
                     <span>{formatDate(post.publishedAt)}</span>
                   </div>
-                  <h3 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground group-hover:underline group-hover:underline-offset-4">
+                  <h3 className="font-sans text-xl font-semibold leading-snug tracking-tight text-foreground group-hover:underline group-hover:underline-offset-4">
                     {post.data.title}
                   </h3>
                   <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">
@@ -63,7 +63,7 @@ export async function LatestWriting() {
                   <span className="font-mono text-[0.6rem] uppercase tracking-[0.18em] text-muted-foreground">
                     product · {p.data.category}
                   </span>
-                  <span className="font-display text-lg font-semibold tracking-tight text-foreground">
+                  <span className="font-sans text-lg font-semibold tracking-tight text-foreground">
                     {p.data.name}
                   </span>
                   <span className="text-sm text-muted-foreground">{p.data.tagline}</span>

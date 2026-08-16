@@ -51,7 +51,7 @@ export default async function BlogIndexPage() {
                           {formatDate(post.publishedAt)}
                         </span>
                       </div>
-                      <h2 className="font-display text-xl font-semibold leading-snug tracking-tight text-foreground group-hover:underline group-hover:underline-offset-4">
+                      <h2 className="font-sans text-xl font-semibold leading-snug tracking-tight text-foreground group-hover:underline group-hover:underline-offset-4">
                         {post.data.title}
                       </h2>
                       <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
