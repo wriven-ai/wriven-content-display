@@ -11,8 +11,14 @@ import { getCaseStudy, getCaseStudies } from '@/lib/content/case-studies';
 import { isExpanded } from '@/lib/content/shared';
 
 export async function generateStaticParams() {
-  const studies = await getCaseStudies();
-  return studies.map((s) => ({ slug: s.slug }));
+  try {
+    const studies = await getCaseStudies();
+    return studies.map((s) => ({ slug: s.slug }));
+  } catch {
+    // Delivery API unreachable at build time — don't fail the whole deploy;
+    // slugs render on demand (dynamicParams defaults to true) once it recovers.
+    return [];
+  }
 }
 
 export async function generateMetadata({

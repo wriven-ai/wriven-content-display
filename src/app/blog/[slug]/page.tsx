@@ -13,8 +13,14 @@ import { getPost, getPosts } from '@/lib/content/blog';
 import { formatDate, isExpanded } from '@/lib/content/shared';
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  try {
+    const posts = await getPosts();
+    return posts.map((p) => ({ slug: p.slug }));
+  } catch {
+    // Delivery API unreachable at build time — don't fail the whole deploy;
+    // slugs render on demand (dynamicParams defaults to true) once it recovers.
+    return [];
+  }
 }
 
 export async function generateMetadata({
